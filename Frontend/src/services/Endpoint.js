@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const BaseUrl='http://localhost:5000'
+export const BaseUrl=import.meta.env.VITE_BASE_URL 
 const instance = axios.create({
     baseURL:BaseUrl,
     // headers: {
@@ -9,11 +9,7 @@ const instance = axios.create({
 });
 
 export const get = (url, params) => instance.get(url, { params });
-export const post = (url, data) => {
-    // If data is FormData, axios will automatically set Content-Type with boundary
-    // Don't manually set it to let axios handle it properly
-    return instance.post(url, data);
-};
+export const post = (url, data) => instance.post(url, data);
 export const put = (url, data) => instance.put(url, data);
 export const delet = (url) => instance.delete(url);
 export const patch= (url,data)=> instance.patch(url,data)
