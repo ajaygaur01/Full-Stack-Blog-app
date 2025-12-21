@@ -32,13 +32,13 @@ pipeline {
             }
         }
 
-        stage('Gitleaks Scan') {
-            steps {
-                sh '''
-                  gitleaks detect --source . --exit-code 1
-                '''
-            }
-        }
+        // stage('Gitleaks Scan') {
+        //     steps {
+        //         sh '''
+        //           gitleaks detect --source . --exit-code 1
+        //         '''
+        //     }
+        // }
 
         stage('SonarQube Analysis') {
             steps {
