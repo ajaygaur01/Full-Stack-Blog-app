@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarQubeScanner 'sonar-scanner'
+        SonarQubeScanner 'sonar-scanner'
     }
 
     environment {
@@ -85,7 +85,7 @@ pipeline {
         stage('Authenticate to ECR') {
             steps {
                 script {
-                    // Use AWS credentials from Jenkins Credentials Store
+                    // Use AWS credenti                    als from Jenkins Credentials Store
                     withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}") {
                         sh '''
                           echo "Authenticating to ECR..."
