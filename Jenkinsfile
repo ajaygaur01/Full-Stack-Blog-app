@@ -96,20 +96,19 @@ stage('Sonar Quality Gate') {
             }
         }
 
-        stage('Authenticate to ECR') {
-            steps {
-                script {
-                    // Use AWS credenti                    als from Jenkins Credentials Store
-                    withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}") {
-                        sh '''
-                          echo "Authenticating to ECR..."
-                          aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
-                          echo "ECR authentication successful!"
-                        '''
-                    }
-                }
-            }
+     stage('Authenticate to ECR') {
+    steps {
+        withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}") {
+            sh '''
+              echo "Authenticating to ECR..."
+              aws ecr get-login-password --region ${AWS_REGION} \
+              | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+              echo "ECR authentication successful!"
+            '''
         }
+    }
+}
+
 
         stage('Push Images to ECR') {
             steps {
