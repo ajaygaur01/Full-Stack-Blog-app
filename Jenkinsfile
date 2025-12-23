@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-    tools {
-    sonarRunner 'sonar-qube'
-}
+ 
 
 
     environment {
@@ -45,17 +43,22 @@ pipeline {
         //     }
         // }
 
-        stage('SonarQube Analysis') {
-            steps {
-                 withSonarQubeEnv('sonarqube') {
-                    sh '''
-                      sonar-scanner \
-                      -Dsonar.projectKey=devsecops \
-                      -Dsonar.sources=Backend,Frontend
-                    '''
-                }
-            }
+      stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh '''
+              docker run --rm \
+                -v "$PWD:/usr/src" \
+                -e SONAR_HOST_URL=$SONAR_HOST_URL \
+                -e SONAR_LOGIN=$SONAR_AUTH_TOKEN \
+                sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=devsecops \
+                -Dsonar.sources=Backend,Frontend
+            '''
         }
+    }
+}
+
 
         stage('Sonar Quality Gate') {
             steps {
