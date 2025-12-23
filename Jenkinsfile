@@ -43,14 +43,15 @@ pipeline {
         //     }
         // }
 
-      stage('SonarQube Analysis') {
+stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('sonarqube') {
             sh '''
               docker run --rm \
+                --network devsecops-nets \
                 -v "$PWD:/usr/src" \
                 -e SONAR_HOST_URL=$SONAR_HOST_URL \
-                -e SONAR_LOGIN=$SONAR_AUTH_TOKEN \
+                -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                 sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=devsecops \
                 -Dsonar.sources=Backend,Frontend
