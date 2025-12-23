@@ -50,30 +50,21 @@ stage('List Workspace') {
 
 stage('SonarQube Analysis') {
     steps {
-        withSonarQubeEnv('sonarqube') {
-            sh """
-              # Copy workspace into a temporary folder inside the container
-              docker run --rm \
-                --network devsecops-nets \
-                -w /usr/src \
-                -e SONAR_HOST_URL=$SONAR_HOST_URL \
-                -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
-                alpine sh -c "cp -r $WORKSPACE/* /usr/src"
-
-              # Run SonarScanner inside the container
-              docker run --rm \
-                --network devsecops-nets \
-                -w /usr/src \
-                -e SONAR_HOST_URL=$SONAR_HOST_URL \
-                -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
-                sonarsource/sonar-scanner-cli \
-                -Dsonar.projectKey=devsecops \
-                -Dsonar.sources=Backend,Frontend
-            """
-        }
-    }
+                withSonarQubeEnv('sonarqube') {
+                    sh """
+                      docker run --rm \
+                        --network devsecops-nets \
+                        -v "$WORKSPACE:/usr/src" \
+                        -w /usr/src \
+                        -e SONAR_HOST_URL=$SONAR_HOST_URL \
+                        -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
+                        sonarsource/sonar-scanner-cli \
+                        -Dsonar.projectKey=devsecops \
+                        -Dsonar.sources=Backend,Frontend
+                    """
+                }
+            }
 }
-
 
 
         stage('Sonar Quality Gate') {
