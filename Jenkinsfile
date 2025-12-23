@@ -50,30 +50,29 @@ stage('List Workspace') {
 
 stage('SonarQube Analysis') {
     steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh """
-                      docker run --rm \
-                        --network devsecops-nets \
-                        -v "$WORKSPACE:/usr/src" \
-                        -w /usr/src \
-                        -e SONAR_HOST_URL=$SONAR_HOST_URL \
-                        -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
-                        sonarsource/sonar-scanner-cli \
-                        -Dsonar.projectKey=devsecops \
-                        -Dsonar.sources=Backend,Frontend
-                    """
-                }
-            }
+        withSonarQubeEnv('sonarqube') {
+            sh """
+              docker run --rm --network devsecops-nets \
+                -v "$WORKSPACE:/usr/src" \
+                -w /usr/src \
+                -e SONAR_HOST_URL=http://host.docker.internal:9000 \
+                -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
+                sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=devsecops \
+                -Dsonar.sources=3-Tier-DevSecOps-Mega-Project
+            """
+        }
+    }
 }
 
-
-        stage('Sonar Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
+stage('Sonar Quality Gate') {
+    steps {
+        timeout(time: 2, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
+    }
+}
+
 
         stage('Build Docker Images') {
             steps {
