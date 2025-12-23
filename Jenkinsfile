@@ -49,7 +49,7 @@ stage('List Workspace') {
 }
 
 stage('SonarQube Analysis') {
-    ststeps {
+    steps {
                 withSonarQubeEnv('sonarqube') {
                     sh """
                       docker run --rm \
