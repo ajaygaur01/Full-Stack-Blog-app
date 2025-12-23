@@ -55,11 +55,11 @@ stage('SonarQube Analysis') {
               docker run --rm --network devsecops-nets \
                 -v "$WORKSPACE:/usr/src" \
                 -w /usr/src \
-               -e SONAR_HOST_URL=http://sonarqube:9000 \
+                -e SONAR_HOST_URL=$SONAR_HOST_URL \
                 -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                 sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=devsecops \
-                -Dsonar.sources=3-Tier-DevSecOps-Mega-Project
+                -Dsonar.sources=.
             """
         }
     }
