@@ -54,7 +54,7 @@ stage('SonarQube Analysis') {
                 -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                 sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=devsecops \
-                -Dsonar.sources=Backend,Frontend
+                -Dsonar.sources=/usr/src/Backend,/usr/src/Frontend
             '''
         }
     }
