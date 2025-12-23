@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        SonarQubeScanner 'sonar-scanner'
+     tools {
+        sonarScanner 'sonar-qube'
     }
 
     environment {
@@ -46,10 +46,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarqube') {
+                 withSonarQubeEnv('sonarqube') {
                     sh '''
                       sonar-scanner \
-                      -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                      -Dsonar.projectKey=devsecops \
                       -Dsonar.sources=Backend,Frontend
                     '''
                 }
