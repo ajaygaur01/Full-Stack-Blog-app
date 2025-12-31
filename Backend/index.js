@@ -31,6 +31,11 @@ app.use('/dashboard',DashboardRoutes)
 app.use('/comment',CommentRoutes)
 app.use('/public',PublicRoutes)
 
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+  });
+  
+
 app.listen(PORT,()=>{
     console.log(`App is running on Port ${PORT}`)
 })
