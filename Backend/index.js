@@ -31,10 +31,9 @@ app.use('/dashboard',DashboardRoutes)
 app.use('/comment',CommentRoutes)
 app.use('/public',PublicRoutes)
 
-app.get('/api/health', (req, res) => {
-    res.send('OK');
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
   });
-  
   
 
 app.listen(PORT,()=>{
