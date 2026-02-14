@@ -1,7 +1,6 @@
 import axios from 'axios';
-export const BaseUrl=import.meta.env.VITE_BASE_URL 
 const instance = axios.create({
-    baseURL:BaseUrl,
+    baseURL:'/api',
     // headers: {
     //     'Content-Type': 'application/json' // Removed extra space
     // },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { BaseUrl, delet, get } from '../services/Endpoint';
+import { delet, get } from '../services/Endpoint';
 import toast from 'react-hot-toast';
 
 export default function AllPost() {
@@ -62,7 +62,7 @@ export default function AllPost() {
         {posts && posts.map((post) => (
           <div className="col-md-4 mb-4" key={post._id}>
             <div className="card h-100">
-              <img src={`${BaseUrl}/images/${post.image}`} className="card-img-top" alt={post.title} />
+              <img src={`/api/images/${post.image}`} className="card-img-top" alt={post.title} />
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
                 <p className="card-text">{post.desc}</p>
