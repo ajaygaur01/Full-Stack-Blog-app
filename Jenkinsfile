@@ -1,16 +1,9 @@
 pipeline {
     agent any
 
- 
-
-
     environment {
         SONAR_PROJECT_KEY = "devsecops"
         SONARQUBE_SERVER = "sonarqube"
-        
-        // AWS ECR Configuration
-        // Hardcode these values or set them in Jenkins UI
-        // AWS credentials (Access Key & Secret) should be in Jenkins Credentials Store (ID: aws-ecr-credentials)
         AWS_REGION = "us-east-1"  // Change to your AWS region
         AWS_ACCOUNT_ID = "202533501381"  // Change to your AWS Account ID
         ECR_BACKEND_REPO = "devsecops-backend"  // Change to your ECR repository name
