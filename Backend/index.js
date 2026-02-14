@@ -18,18 +18,18 @@ app.use(express.json())
 app.get('/',(req,res)=>{
     res.send('hello from server')
 })
-app.use(express.static('public'))
 app.use(cookieParser())
 const corsOptoins={
     origin:true,
     credentials:true
 }
 app.use(cors(corsOptoins))
-app.use('/auth',AuthRoutes)
-app.use('/blog',BlogRoutes)
-app.use('/dashboard',DashboardRoutes)
-app.use('/comment',CommentRoutes)
-app.use('/public',PublicRoutes)
+app.use('/api/auth',AuthRoutes)
+app.use('/api/blog',BlogRoutes)
+app.use('/api/dashboard',DashboardRoutes)
+app.use('/api/comment',CommentRoutes)
+app.use('/api/public',PublicRoutes)
+app.use('/api/images', express.static('public/images'))
 
 app.get('/health', (req, res) => {
     res.status(200).send('OK');

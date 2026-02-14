@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { BaseUrl, post } from '../services/Endpoint';
+import { post } from '../services/Endpoint';
 import { removeUser } from '../redux/AuthSlice';
 import toast from 'react-hot-toast';
 
@@ -33,7 +33,7 @@ export default function Navbar() {
             <div className="avatar-container pointer rounded-circle overflow-hidden bg-info" data-bs-toggle="dropdown" aria-expanded="false" style={{ width: '40px', height: '40px', cursor: "pointer" }}>
               <img 
                 className="img-fluid h-100 w-100" 
-                src={`${BaseUrl}/images/${user.profile}`}
+                src={`/api/images/${user.profile}`}
                 alt="Profile"
                 style={{objectFit:"cover"}}
               />

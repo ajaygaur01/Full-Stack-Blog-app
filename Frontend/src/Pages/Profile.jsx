@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaUser, FaLock, FaCamera } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { BaseUrl, patch } from '../services/Endpoint';
+import { patch } from '../services/Endpoint';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { setUser } from '../redux/AuthSlice';
@@ -70,7 +70,7 @@ setName(user.FullName)
             ) : (
               <div className="profile-placeholder">
                 {/* <FaUser className="profile-icon" /> */}
-                <img src={`${BaseUrl}/images/${user.profile}`} alt='Avatar'  className="profile-image" />
+                <img src={`/api/images/${user.profile}`} alt='Avatar'  className="profile-image" />
               </div>
             )}
             <FaCamera className="profile-camera-icon" />

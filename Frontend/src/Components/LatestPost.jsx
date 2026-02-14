@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BaseUrl, get } from '../services/Endpoint';
+import { get } from '../services/Endpoint';
 
 export default function LatestPost() {
     const navigation = useNavigate();
@@ -46,7 +46,7 @@ export default function LatestPost() {
                             <div className="col-md-4 mb-4" key={elem._id}>
                                 <div className="card border-success" style={{ borderWidth: "2px", backgroundColor: "#2b2b2b", borderRadius: "10px", overflow: "hidden" }}>
                                     <img 
-                                        src={`${BaseUrl}/images/${elem.image}`} 
+                                        src={`/api/images/${elem.image}`} 
                                         className="card-img-top img-fluid" 
                                         alt="Blog Post 1" 
                                         style={{ height: "200px", objectFit: "cover" }} 

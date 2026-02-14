@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BaseUrl, get, post } from '../services/Endpoint';
+import { get, post } from '../services/Endpoint';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
@@ -64,7 +64,7 @@ export default function Blog() {
         <div className="col-md-12">
           <h1 className="fw-bold text-white mb-4 display-4">{post && post.title}</h1>
           <img 
-            src={singlePost && `${BaseUrl}/images/${singlePost.image}`} 
+            src={singlePost && `/api/images/${singlePost.image}`} 
             alt="Exploring the Art of Writing" 
             className="img-fluid mb-4" 
             style={{ borderRadius: "10px", maxHeight: "500px", objectFit: "cover", width: "100%" }}
@@ -96,7 +96,7 @@ export default function Blog() {
           return(
             <div className="bg-secondary p-3 rounded mb-3 d-flex">
             <img 
-             src={`${BaseUrl}/images/${elem.userId.profile}`}
+             src={`/api/images/${elem.userId.profile}`}
               alt="John Doe" 
               className="rounded-circle me-3"
               style={{ width: "50px", height: "50px", objectFit: "cover" }}
