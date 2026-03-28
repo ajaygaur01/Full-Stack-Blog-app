@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+ tools {
+        sonarScanner 'sonar-scanner'
+    }
+
+
     environment {
         SONAR_PROJECT_KEY = "devsecops"
         SONARQUBE_SERVER = "sonarqube"
